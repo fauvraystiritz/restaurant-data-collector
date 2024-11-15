@@ -6,6 +6,7 @@ source venv/bin/activate
 
 # Install initial dependencies
 pip install scrapy
+pip install python-dotenv
 
 # Create requirements.txt
 pip freeze > requirements.txt
