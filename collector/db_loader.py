@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def load_restaurants():
-    # Database connection
     conn = psycopg2.connect(
         dbname=os.getenv('DB_NAME'),
         user=os.getenv('DB_USER'),
@@ -17,8 +16,25 @@ def load_restaurants():
     )
     cur = conn.cursor()
 
-    # Find all restaurant JSON files
-    data_files = Path('.').glob('restaurants_*.json')
+    # Create table if it doesn't exist
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS foodie.yelp_restaurants (
+            id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            cuisine_searched VARCHAR(100),
+            rating DECIMAL,
+            review_count INTEGER,
+            price VARCHAR(10),
+            categories JSONB,
+            address JSONB,
+            sort_method VARCHAR(50),
+            borough VARCHAR(50),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    """)
+    
+    # Find all restaurant JSON files in raw_data directory
+    data_files = Path('./raw_data').glob('restaurants_*.json')
     
     for file_path in data_files:
         print(f"Processing {file_path}...")

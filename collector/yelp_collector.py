@@ -12,7 +12,7 @@ class YelpCollector:
     LOCATIONS = [
         #'New York, NY',
         #'Brooklyn, NY'
-        'Los Angeles, CA'
+        #'Los Angeles, CA'
     ]
     
     CUISINES = [
