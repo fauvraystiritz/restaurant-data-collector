@@ -1,5 +1,4 @@
 # Python
-venv/
 __pycache__/
 *.pyc
 
@@ -7,4 +6,4 @@ __pycache__/
 .env
 
 # Output files
-*.json
+raw_data/*.json

@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 import requests
 import json
 from datetime import datetime
@@ -9,8 +10,9 @@ load_dotenv()
 
 class YelpCollector:
     LOCATIONS = [
-        'New York, NY',
-        'Brooklyn, NY'
+        #'New York, NY',
+        #'Brooklyn, NY'
+        'Los Angeles, CA'
     ]
     
     CUISINES = [
@@ -42,6 +44,10 @@ class YelpCollector:
             'Authorization': f'Bearer {self.api_key}'
         }
 
+        # Create raw_data directory if it doesn't exist
+        self.data_dir = Path(__file__).parent.parent / 'raw_data'
+        self.data_dir.mkdir(exist_ok=True)
+
     def collect_location(self, location):
         """Collect restaurants for all cuisines in a location"""
         location_data = []
@@ -54,7 +60,7 @@ class YelpCollector:
             time.sleep(1)  # Be nice to the API
         
         # Save data for this location
-        filename = f'restaurants_{location.split(",")[0].lower().replace(" ", "_")}_{datetime.now().strftime("%Y%m%d")}.json'
+        filename = self.data_dir / f'restaurants_{location.split(",")[0].lower().replace(" ", "_")}_{datetime.now().strftime("%Y%m%d")}.json'
         self.save_results(location_data, filename)
         print(f"Saved {len(location_data)} restaurants for {location}")
         
