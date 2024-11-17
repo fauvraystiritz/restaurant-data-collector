@@ -1,17 +1,7 @@
 #!/bin/bash
 
-# Create and activate virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Check if Poetry is installed
-if ! command -v poetry &> /dev/null; then
-    echo "Poetry is not installed. Installing Poetry..."
-    curl -sSL https://install.python-poetry.org | python3 -
-fi
-
-# Configure Poetry to not create its own virtual environment
-poetry config virtualenvs.create false --local
+# Set Python version for the project
+pyenv local 3.11
 
 # Install dependencies using Poetry
 poetry install
@@ -26,4 +16,4 @@ DB_HOST=localhost" > .env
     echo "Created .env file - please update with your actual credentials"
 fi
 
-echo "Setup complete! Don't forget to run 'source venv/bin/activate' to activate the virtual environment"
+echo "Setup complete! Use 'poetry shell' to activate the virtual environment"
