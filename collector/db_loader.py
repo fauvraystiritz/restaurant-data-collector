@@ -18,7 +18,7 @@ def load_restaurants():
 
     # Create table if it doesn't exist
     cur.execute("""
-        CREATE TABLE IF NOT EXISTS foodie.yelp_restaurants (
+        CREATE TABLE IF NOT EXISTS foodie.yelp_restaurant (
             id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
             cuisine_searched VARCHAR(100),
