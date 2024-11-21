@@ -61,7 +61,7 @@ def load_restaurants():
         execute_values(
             cur,
             """
-            INSERT INTO restaurants 
+            INSERT INTO foodie.yelp_restaurant 
                 (name, cuisine_searched, rating, review_count, price, 
                  categories, address, sort_method, borough)
             VALUES %s
