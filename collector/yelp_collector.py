@@ -100,7 +100,7 @@ class YelpCollector:
                             'city': business['location']['city'],
                             'zip': business['location']['zip_code'],
                             'state': business['location']['state'],
-                            'borough': location.split(',')[0]
+                            #'borough': location.split(',')[0]
                         },
                         'sort_method': sort_by  # Track how we found this restaurant
                     })
